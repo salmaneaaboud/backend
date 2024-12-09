@@ -7,6 +7,9 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Auth\Notifications\VerifyEmail;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 class AuthController extends Controller
 {
@@ -24,6 +27,8 @@ class AuthController extends Controller
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
             ]);
+
+            event(new Registered($user));
 
             $token = $user->createToken('auth_token')->plainTextToken;
 
@@ -112,6 +117,49 @@ class AuthController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => 'Error al cerrar sesión',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function verifyEmail(EmailVerificationRequest $request)
+    {
+        try {
+            $request->fulfill();
+            
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Email verificado exitosamente'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Error al verificar email',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function resendVerificationEmail(Request $request)
+    {
+        try {
+            if ($request->user()->hasVerifiedEmail()) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'El email ya está verificado'
+                ], 400);
+            }
+
+            $request->user()->sendEmailVerificationNotification();
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Link de verificación enviado'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Error al enviar email de verificación',
                 'error' => $e->getMessage()
             ], 500);
         }
