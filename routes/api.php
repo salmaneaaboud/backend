@@ -11,9 +11,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', [AuthController::class, 'user']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });
-
+ 
 Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])
-    ->middleware(['signed'])->name('verification.verify');
+    ->middleware(['signed'])
+    ->name('verification.verify');
 
 Route::post('/email/verification-notification', [AuthController::class, 'resendVerificationEmail'])
-    ->middleware(['throttle:6,1'])->name('verification.send');
+    ->middleware(['auth:sanctum', 'throttle:6,1'])
+    ->name('verification.send');
