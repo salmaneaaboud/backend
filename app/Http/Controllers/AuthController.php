@@ -122,21 +122,28 @@ class AuthController extends Controller
         }
     }
 
-    public function verifyEmail(EmailVerificationRequest $request)
+    public function verifyEmail(Request $request)
     {
         try {
-            $request->fulfill();
+            $user = User::find($request->id);
             
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Email verificado exitosamente'
-            ]);
+            if (!$user) {
+                return redirect(env('FRONTEND_URL') . '/email-verification/error?message=usuario-no-encontrado');
+            }
+
+            if (!hash_equals(sha1($user->getEmailForVerification()), $request->hash)) {
+                return redirect(env('FRONTEND_URL') . '/email-verification/error?message=url-invalida');
+            }
+
+            if ($user->hasVerifiedEmail()) {
+                return redirect(env('FRONTEND_URL') . '/email-verification/error?message=ya-verificado');
+            }
+
+            $user->markEmailAsVerified();
+
+            return redirect(env('FRONTEND_URL') . '/email-verification/success');
         } catch (\Exception $e) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Error al verificar email',
-                'error' => $e->getMessage()
-            ], 500);
+            return redirect(env('FRONTEND_URL') . '/email-verification/error?message=error-general');
         }
     }
 
