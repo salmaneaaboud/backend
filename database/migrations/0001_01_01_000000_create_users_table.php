@@ -19,7 +19,14 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+
+            $table->integer('role_id');
+            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->string('avatar_picture')->nullable();
+            $table->foreign('rol_id')->references('id')->on('roles');
+
         });
+        
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
