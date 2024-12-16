@@ -151,7 +151,7 @@ text-decoration: none
 <td class="t3" style="width:208px;">
 <!--<![endif]-->
 <table class="t2" role="presentation" cellpadding="0" cellspacing="0" width="100%" style="width:100%;"><tr>
-<td class="t1"><a href="{{ $url }}" style="font-size:0px;" target="_blank"><img class="t0" style="display:block;border:0;height:auto;width:100%;Margin:0;max-width:100%;" width="208" height="56.375" alt="" src="https://beb63ee6-22d7-43b3-b3e0-afded0535cb3.b-cdn.net/e/847a365e-c2fa-4208-aaa0-151621fad900/8999bc4b-239a-46ba-9ffd-55379bae2a30.png"/></a></td>
+<td class="t1"><a href="#" style="font-size:0px;" target="_blank"><img class="t0" style="display:block;border:0;height:auto;width:100%;Margin:0;max-width:100%;" width="208" height="56.375" alt="" src="https://beb63ee6-22d7-43b3-b3e0-afded0535cb3.b-cdn.net/e/847a365e-c2fa-4208-aaa0-151621fad900/8999bc4b-239a-46ba-9ffd-55379bae2a30.png"/></a></td>
 </tr></table>
 </td>
 </tr></table>
@@ -193,7 +193,7 @@ text-decoration: none
 <td class="t21" style="background-color:#0057FF;overflow:hidden;width:154px;border-radius:8px 8px 8px 8px;">
 <!--<![endif]-->
 <table class="t20" role="presentation" cellpadding="0" cellspacing="0" width="100%" style="width:100%;"><tr>
-<td class="t19" style="text-align:center;line-height:40px;mso-line-height-rule:exactly;mso-text-raise:8px;"><a class="t17" href="#" style="display:block;margin:0;Margin:0;font-family:Inter,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Arial,sans-serif;line-height:40px;font-weight:700;font-style:normal;font-size:15px;text-decoration:none;letter-spacing:-0.5px;direction:ltr;color:#FFFFFF;text-align:center;mso-line-height-rule:exactly;mso-text-raise:8px;" target="_blank">Verificar mi cuenta</a></td>
+<td class="t19" style="text-align:center;line-height:40px;mso-line-height-rule:exactly;mso-text-raise:8px;"><a class="t17" href="{{ $url }}" style="display:block;margin:0;Margin:0;font-family:Inter,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Arial,sans-serif;line-height:40px;font-weight:700;font-style:normal;font-size:15px;text-decoration:none;letter-spacing:-0.5px;direction:ltr;color:#FFFFFF;text-align:center;mso-line-height-rule:exactly;mso-text-raise:8px;" target="_blank">Verificar mi cuenta</a></td>
 </tr></table>
 </td>
 </tr></table>
